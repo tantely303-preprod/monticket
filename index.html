@@ -1,1 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Plein écran</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(45deg, #1e90ff, #00fa9a);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      font-family: Arial, sans-serif;
+      transition: background 0.5s;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: rgba(255,255,255,0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Mettre la page en plein écran</h1>
+  <button id="fullscreenBtn">Activer plein écran</button>
+
+  <script>
+    const button = document.getElementById("fullscreenBtn");
+
+    button.addEventListener("click", () => {
+      const docEl = document.documentElement;
+
+      if (!document.fullscreenElement) {
+        // Demande le plein écran
+        if (docEl.requestFullscreen) {
+          docEl.requestFullscreen();
+        } else if (docEl.mozRequestFullScreen) { // Firefox
+          docEl.mozRequestFullScreen();
+        } else if (docEl.webkitRequestFullscreen) { // Chrome, Safari
+          docEl.webkitRequestFullscreen();
+        } else if (docEl.msRequestFullscreen) { // IE/Edge
+          docEl.msRequestFullscreen();
+        }
+        button.textContent = "Quitter plein écran";
+      } else {
+        // Quitte le plein écran
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        }
+        button.textContent = "Activer plein écran";
+      }
+    });
+  </script>
+
+</body>
+</html>
 
